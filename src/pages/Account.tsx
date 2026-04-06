@@ -46,7 +46,8 @@ const Account = () => {
   const [profile, setProfile] = useState({
     name: "Rahul Sharma",
     phone: "+91 98765 43210",
-    address: "42, MG Road, Bengaluru, Karnataka 560001",
+    shippingAddress: "42, MG Road, Bengaluru, Karnataka 560001",
+    billingAddress: "42, MG Road, Bengaluru, Karnataka 560001",
     gst: "29ABCDE1234F1Z5",
     password: "••••••••",
   });
@@ -77,7 +78,8 @@ const Account = () => {
 
   const settingsFields = [
     { key: "name", label: "Name", icon: User, type: "text" },
-    { key: "address", label: "Address", icon: Edit2, type: "text" },
+    { key: "shippingAddress", label: "Shipping Address", icon: Edit2, type: "text" },
+    { key: "billingAddress", label: "Billing Address", icon: Edit2, type: "text" },
     { key: "phone", label: "Phone Number", icon: Phone, type: "tel" },
     { key: "gst", label: "GST Number", icon: FileText, type: "text" },
     { key: "password", label: "Password", icon: Settings, type: "password" },

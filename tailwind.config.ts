@@ -12,8 +12,16 @@ export default {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      sans: ['Roboto', 'sans-serif'],
+      display: ['"Product Sans"', 'Roboto', 'sans-serif'],
+    },
     extend: {
       colors: {
+        "google-blue": "hsl(var(--google-blue))",
+        "google-red": "hsl(var(--google-red))",
+        "google-yellow": "hsl(var(--google-yellow))",
+        "google-green": "hsl(var(--google-green))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

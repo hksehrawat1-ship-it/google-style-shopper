@@ -78,7 +78,8 @@ const Account = () => {
 
   const settingsFields = [
     { key: "name", label: "Name", icon: User, type: "text" },
-    { key: "address", label: "Address", icon: Edit2, type: "text" },
+    { key: "shippingAddress", label: "Shipping Address", icon: Edit2, type: "text" },
+    { key: "billingAddress", label: "Billing Address", icon: Edit2, type: "text" },
     { key: "phone", label: "Phone Number", icon: Phone, type: "tel" },
     { key: "gst", label: "GST Number", icon: FileText, type: "text" },
     { key: "password", label: "Password", icon: Settings, type: "password" },

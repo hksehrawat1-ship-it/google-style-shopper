@@ -46,7 +46,8 @@ const Account = () => {
   const [profile, setProfile] = useState({
     name: "Rahul Sharma",
     phone: "+91 98765 43210",
-    address: "42, MG Road, Bengaluru, Karnataka 560001",
+    shippingAddress: "42, MG Road, Bengaluru, Karnataka 560001",
+    billingAddress: "42, MG Road, Bengaluru, Karnataka 560001",
     gst: "29ABCDE1234F1Z5",
     password: "••••••••",
   });

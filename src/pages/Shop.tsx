@@ -31,7 +31,7 @@ const products = [
   { id: 12, name: "Steam Iron Teflon Sole", hsn: "8516", price: 980, category: "Others" },
 ];
 
-const FREE_SHIPPING_THRESHOLD = 20000;
+const FREE_SHIPPING_THRESHOLD = 50000;
 const GST_RATE = 0.18;
 
 const Shop = () => {

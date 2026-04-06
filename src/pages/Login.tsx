@@ -21,7 +21,7 @@ const Login = () => {
         <div className="flex flex-col items-center mb-8">
           <GoogleLogo />
           <h1 className="text-2xl font-display font-medium text-foreground mt-4">Sign in</h1>
-          <p className="text-muted-foreground text-sm mt-1">to continue to ShopHub</p>
+          <p className="text-muted-foreground text-sm mt-1 text-center">India's One-Stop Solution To All Laundry & Dry Cleaning Needs</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-5">
@@ -30,7 +30,7 @@ const Login = () => {
             <Input
               id="phone"
               type="tel"
-              placeholder="+1 (555) 000-0000"
+              placeholder=""
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               required

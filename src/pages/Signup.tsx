@@ -60,7 +60,7 @@ const Signup = () => {
         <div className="flex flex-col items-center mb-6">
           <GoogleLogo />
           <h1 className="text-2xl font-display font-medium text-foreground mt-4">Create account</h1>
-          <p className="text-muted-foreground text-sm mt-1">Join ShopHub today</p>
+          <p className="text-muted-foreground text-sm mt-1">Join Clean Craft Store today</p>
         </div>
 
         <form onSubmit={handleSignup} className="space-y-4">
@@ -116,7 +116,7 @@ const Signup = () => {
             <Input
               id="signup-phone"
               type="tel"
-              placeholder="+1 (555) 000-0000"
+              placeholder=""
               value={form.phone}
               onChange={(e) => update("phone", e.target.value)}
               required

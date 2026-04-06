@@ -14,8 +14,11 @@ const Signup = () => {
     name: "",
     email: "",
     address: "",
+    pincode: "",
     phone: "",
     password: "",
+    gstin: "",
+    billingAddress: "",
   });
   const [detectingLocation, setDetectingLocation] = useState(false);
 

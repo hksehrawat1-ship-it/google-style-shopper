@@ -2,17 +2,9 @@ import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, ShoppingCart, User, Plus, Minus, Truck } from "lucide-react";
+import { Search, ShoppingCart, User, Plus, Minus, Truck, ChevronUp, ChevronDown } from "lucide-react";
 import GoogleLogo from "@/components/GoogleLogo";
 import { useNavigate } from "react-router-dom";
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCell,
-} from "@/components/ui/table";
 
 const categories = ["All", "Detergents", "Machine Parts", "Consumables", "Packaging Material", "Others"];
 
@@ -47,7 +39,8 @@ const Shop = () => {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [cart, setCart] = useState<Record<number, number>>({});
-  const currentStep = 2; // demo: Packed
+  const [cartExpanded, setCartExpanded] = useState(false);
+  const currentStep = 2;
 
   const filtered = products.filter(
     (p) =>
@@ -79,81 +72,83 @@ const Shop = () => {
   }, [cart]);
 
   return (
-    <div className="min-h-screen bg-secondary/30">
-      {/* Header */}
+    <div className="min-h-screen bg-secondary/30 pb-40">
+      {/* Header – compact for mobile */}
       <header className="sticky top-0 z-50 bg-card border-b border-border shadow-sm">
-        <div className="container mx-auto flex items-center gap-4 py-3 px-4">
+        <div className="flex items-center gap-2 py-2 px-3">
           <GoogleLogo />
-          <div className="flex-1 max-w-xl mx-auto relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search Clean Craft Store"
-              className="pl-10 rounded-full border-input bg-secondary/50"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="relative">
+          <div className="flex items-center gap-1 ml-auto">
+            <Button variant="ghost" size="icon" className="relative h-9 w-9" onClick={() => setCartExpanded(!cartExpanded)}>
               <ShoppingCart className="h-5 w-5" />
               {cartCount > 0 && (
-                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs">
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-[10px]">
                   {cartCount}
                 </Badge>
               )}
             </Button>
-            <Button variant="ghost" size="icon" onClick={() => navigate("/account")}>
+            <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => navigate("/account")}>
               <User className="h-5 w-5" />
             </Button>
           </div>
         </div>
+
+        {/* Search – full width below logo */}
+        <div className="px-3 pb-2">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search products..."
+              className="pl-10 h-9 rounded-full border-input bg-secondary/50 text-sm"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+        </div>
       </header>
 
-      {/* Live Tracking */}
-      <div className="bg-card border-b border-border">
-        <div className="container mx-auto px-4 py-5">
-          <h2 className="text-sm font-semibold text-foreground mb-4">Live Order Tracking</h2>
-          <div className="flex items-center justify-between max-w-2xl mx-auto">
-            {trackingSteps.map((step, i) => (
-              <div key={step.step} className="flex items-center flex-1 last:flex-initial">
-                <div className="flex flex-col items-center gap-1.5">
-                  <div
-                    className={`w-4 h-4 rounded-full border-2 transition-all ${
-                      step.step <= currentStep
-                        ? "bg-primary border-primary shadow-md shadow-primary/30"
-                        : "bg-background border-muted-foreground/30"
-                    }`}
-                  />
-                  <span
-                    className={`text-[10px] font-medium whitespace-nowrap ${
-                      step.step <= currentStep ? "text-primary" : "text-muted-foreground"
-                    }`}
-                  >
-                    {step.label}
-                  </span>
-                </div>
-                {i < trackingSteps.length - 1 && (
-                  <div
-                    className={`flex-1 h-0.5 mx-1 mt-[-18px] ${
-                      step.step < currentStep ? "bg-primary" : "bg-muted-foreground/20"
-                    }`}
-                  />
-                )}
+      {/* Live Tracking – compact horizontal */}
+      <div className="bg-card border-b border-border px-3 py-3">
+        <p className="text-[11px] font-semibold text-muted-foreground mb-2 uppercase tracking-wider">Order Tracking</p>
+        <div className="flex items-center">
+          {trackingSteps.map((step, i) => (
+            <div key={step.step} className="flex items-center flex-1 last:flex-initial">
+              <div className="flex flex-col items-center gap-1">
+                <div
+                  className={`w-3.5 h-3.5 rounded-full border-2 transition-all ${
+                    step.step <= currentStep
+                      ? "bg-primary border-primary shadow-sm shadow-primary/30"
+                      : "bg-background border-muted-foreground/30"
+                  }`}
+                />
+                <span
+                  className={`text-[9px] font-medium whitespace-nowrap ${
+                    step.step <= currentStep ? "text-primary" : "text-muted-foreground"
+                  }`}
+                >
+                  {step.label}
+                </span>
               </div>
-            ))}
-          </div>
+              {i < trackingSteps.length - 1 && (
+                <div
+                  className={`flex-1 h-0.5 mx-0.5 mt-[-14px] ${
+                    step.step < currentStep ? "bg-primary" : "bg-muted-foreground/20"
+                  }`}
+                />
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Categories */}
+      {/* Categories – horizontally scrollable pills */}
       <div className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 flex gap-2 py-3 overflow-x-auto">
+        <div className="flex gap-1.5 py-2 px-3 overflow-x-auto scrollbar-hide">
           {categories.map((cat) => (
             <Button
               key={cat}
               variant={activeCategory === cat ? "default" : "secondary"}
               size="sm"
-              className="rounded-full shrink-0 text-xs"
+              className="rounded-full shrink-0 text-xs h-8 px-3"
               onClick={() => setActiveCategory(cat)}
             >
               {cat}
@@ -162,110 +157,131 @@ const Shop = () => {
         </div>
       </div>
 
-      {/* Products Table */}
-      <main className="container mx-auto px-4 py-6 space-y-6">
-        <div className="bg-card border border-border rounded-lg overflow-hidden">
-          <Table>
-            <TableHeader>
-              <TableRow className="bg-secondary/50">
-                <TableHead className="w-12 text-center">S.No.</TableHead>
-                <TableHead>Item Detail</TableHead>
-                <TableHead className="w-24 text-center">HSN Code</TableHead>
-                <TableHead className="w-28 text-right">Rate (₹)</TableHead>
-                <TableHead className="w-36 text-center">Qty</TableHead>
-                <TableHead className="w-28 text-right">Amount (₹)</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filtered.map((product, idx) => {
-                const qty = cart[product.id] || 0;
-                return (
-                  <TableRow key={product.id} className="hover:bg-secondary/30">
-                    <TableCell className="text-center text-muted-foreground text-sm">
-                      {idx + 1}
-                    </TableCell>
-                    <TableCell>
-                      <div>
-                        <p className="font-medium text-sm text-foreground">{product.name}</p>
-                        <p className="text-xs text-muted-foreground">{product.category}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-center text-sm text-muted-foreground">
-                      {product.hsn}
-                    </TableCell>
-                    <TableCell className="text-right font-medium text-sm">
-                      ₹{product.price.toLocaleString("en-IN")}
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center justify-center gap-2">
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="h-7 w-7"
-                          onClick={() => updateQty(product.id, -1)}
-                          disabled={qty === 0}
-                        >
-                          <Minus className="h-3 w-3" />
-                        </Button>
-                        <span className="w-6 text-center text-sm font-medium">{qty}</span>
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="h-7 w-7"
-                          onClick={() => updateQty(product.id, 1)}
-                        >
-                          <Plus className="h-3 w-3" />
-                        </Button>
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-right font-medium text-sm">
-                      {qty > 0 ? `₹${(product.price * qty).toLocaleString("en-IN")}` : "—"}
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-              {filtered.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
-                    No products found
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
+      {/* Product Cards – mobile-optimized */}
+      <main className="px-3 py-3 space-y-2">
+        {filtered.map((product) => {
+          const qty = cart[product.id] || 0;
+          return (
+            <div
+              key={product.id}
+              className="bg-card border border-border rounded-lg p-3 flex items-center gap-3"
+            >
+              {/* Product info */}
+              <div className="flex-1 min-w-0">
+                <p className="font-medium text-sm text-foreground leading-tight truncate">{product.name}</p>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <span className="text-xs text-muted-foreground">{product.category}</span>
+                  <span className="text-[10px] text-muted-foreground/60">HSN: {product.hsn}</span>
+                </div>
+                <p className="text-sm font-semibold text-foreground mt-1">
+                  ₹{product.price.toLocaleString("en-IN")}
+                </p>
+              </div>
 
-        {/* Totals */}
-        {cartCount > 0 && (
-          <div className="bg-card border border-border rounded-lg p-6 max-w-sm ml-auto space-y-3">
-            <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Subtotal</span>
-              <span className="font-medium">₹{subtotal.toLocaleString("en-IN")}</span>
+              {/* Quantity controls */}
+              <div className="flex items-center gap-1.5 shrink-0">
+                {qty > 0 ? (
+                  <>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 rounded-full"
+                      onClick={() => updateQty(product.id, -1)}
+                    >
+                      <Minus className="h-3.5 w-3.5" />
+                    </Button>
+                    <span className="w-7 text-center text-sm font-semibold">{qty}</span>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 rounded-full"
+                      onClick={() => updateQty(product.id, 1)}
+                    >
+                      <Plus className="h-3.5 w-3.5" />
+                    </Button>
+                  </>
+                ) : (
+                  <Button
+                    size="sm"
+                    className="h-8 px-4 rounded-full text-xs font-semibold"
+                    onClick={() => updateQty(product.id, 1)}
+                  >
+                    Add
+                  </Button>
+                )}
+              </div>
             </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">GST (18%)</span>
-              <span className="font-medium">₹{gst.toLocaleString("en-IN")}</span>
-            </div>
-            <div className="flex justify-between text-sm items-center">
-              <span className="text-muted-foreground flex items-center gap-1">
-                <Truck className="h-3.5 w-3.5" /> Transportation
-              </span>
-              {freeShipping ? (
-                <span className="text-primary font-medium text-xs">FREE</span>
-              ) : (
-                <span className="text-destructive text-xs font-medium">
-                  Order ₹{(FREE_SHIPPING_THRESHOLD - subtotal).toLocaleString("en-IN")} more for free shipping
-                </span>
-              )}
-            </div>
-            <div className="border-t border-border pt-3 flex justify-between">
-              <span className="font-semibold text-foreground">Final Amount</span>
-              <span className="font-bold text-lg text-primary">₹{total.toLocaleString("en-IN")}</span>
-            </div>
-            <Button className="w-full mt-2">Place Order</Button>
+          );
+        })}
+
+        {filtered.length === 0 && (
+          <div className="text-center py-12 text-muted-foreground text-sm">
+            No products found
           </div>
         )}
       </main>
+
+      {/* Sticky Bottom Cart Summary */}
+      {cartCount > 0 && (
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+          {/* Expandable detail */}
+          {cartExpanded && (
+            <div className="px-4 pt-3 pb-1 space-y-1.5 border-b border-border max-h-48 overflow-y-auto">
+              {Object.entries(cart).map(([id, qty]) => {
+                const p = products.find((pr) => pr.id === Number(id));
+                if (!p) return null;
+                return (
+                  <div key={id} className="flex justify-between text-xs">
+                    <span className="text-foreground truncate flex-1 mr-2">{p.name} × {qty}</span>
+                    <span className="font-medium shrink-0">₹{(p.price * qty).toLocaleString("en-IN")}</span>
+                  </div>
+                );
+              })}
+              <div className="border-t border-border pt-1.5 space-y-1">
+                <div className="flex justify-between text-xs">
+                  <span className="text-muted-foreground">Subtotal</span>
+                  <span>₹{subtotal.toLocaleString("en-IN")}</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="text-muted-foreground">GST (18%)</span>
+                  <span>₹{gst.toLocaleString("en-IN")}</span>
+                </div>
+                <div className="flex justify-between text-xs items-center">
+                  <span className="text-muted-foreground flex items-center gap-1">
+                    <Truck className="h-3 w-3" /> Shipping
+                  </span>
+                  {freeShipping ? (
+                    <span className="text-primary font-semibold">FREE</span>
+                  ) : (
+                    <span className="text-destructive">₹{(FREE_SHIPPING_THRESHOLD - subtotal).toLocaleString("en-IN")} more for free</span>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Main bar */}
+          <div className="flex items-center gap-3 px-4 py-3">
+            <button
+              onClick={() => setCartExpanded(!cartExpanded)}
+              className="flex items-center gap-1 text-left flex-1 min-w-0"
+            >
+              <div>
+                <p className="text-xs text-muted-foreground">{cartCount} item{cartCount > 1 ? "s" : ""}</p>
+                <p className="text-lg font-bold text-foreground leading-tight">₹{total.toLocaleString("en-IN")}</p>
+              </div>
+              {cartExpanded ? (
+                <ChevronDown className="h-4 w-4 text-muted-foreground ml-1" />
+              ) : (
+                <ChevronUp className="h-4 w-4 text-muted-foreground ml-1" />
+              )}
+            </button>
+            <Button className="h-11 px-6 rounded-full text-sm font-semibold shadow-md">
+              Place Order
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

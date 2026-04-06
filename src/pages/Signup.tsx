@@ -91,11 +91,11 @@ const Signup = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="address">Address</Label>
+            <Label htmlFor="address">Shipping Address</Label>
             <div className="flex gap-2">
               <Input
                 id="address"
-                placeholder="Enter your address"
+                placeholder="Enter your shipping address"
                 value={form.address}
                 onChange={(e) => update("address", e.target.value)}
                 className="flex-1"
@@ -112,6 +112,37 @@ const Signup = () => {
                 <MapPin className={`h-4 w-4 ${detectingLocation ? "animate-pulse text-primary" : ""}`} />
               </Button>
             </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="pincode">Pin Code</Label>
+            <Input
+              id="pincode"
+              placeholder="Enter pin code"
+              value={form.pincode}
+              onChange={(e) => update("pincode", e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="gstin">GSTIN <span className="text-muted-foreground font-normal">(Optional)</span></Label>
+            <Input
+              id="gstin"
+              placeholder="Enter GSTIN number"
+              value={form.gstin}
+              onChange={(e) => update("gstin", e.target.value)}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="billingAddress">Billing Address <span className="text-muted-foreground font-normal">(Optional)</span></Label>
+            <Input
+              id="billingAddress"
+              placeholder="Enter billing address (if different)"
+              value={form.billingAddress}
+              onChange={(e) => update("billingAddress", e.target.value)}
+            />
           </div>
 
           <div className="space-y-2">

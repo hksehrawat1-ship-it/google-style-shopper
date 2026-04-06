@@ -116,7 +116,7 @@ const Signup = () => {
             <Input
               id="signup-phone"
               type="tel"
-              placeholder="+1 (555) 000-0000"
+              placeholder=""
               value={form.phone}
               onChange={(e) => update("phone", e.target.value)}
               required

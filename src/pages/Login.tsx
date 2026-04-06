@@ -30,7 +30,7 @@ const Login = () => {
             <Input
               id="phone"
               type="tel"
-              placeholder="+1 (555) 000-0000"
+              placeholder=""
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               required

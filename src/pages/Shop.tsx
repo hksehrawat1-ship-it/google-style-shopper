@@ -224,9 +224,29 @@ const Shop = () => {
       {/* Sticky Bottom Cart Summary */}
       {cartCount > 0 && (
         <div className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+          {/* Free shipping progress – always visible */}
+          <div className="px-4 pt-2.5 pb-1">
+            <div className="flex items-center justify-between text-[11px] mb-1">
+              <span className="text-muted-foreground flex items-center gap-1">
+                <Truck className="h-3 w-3" /> Free Shipping Progress
+              </span>
+              {freeShipping ? (
+                <span className="text-primary font-semibold">FREE ✓</span>
+              ) : (
+                <span className="text-muted-foreground">₹{(FREE_SHIPPING_THRESHOLD - subtotal).toLocaleString("en-IN")} more</span>
+              )}
+            </div>
+            <div className="w-full h-1.5 rounded-full bg-secondary overflow-hidden">
+              <div
+                className="h-full rounded-full bg-primary transition-all duration-300"
+                style={{ width: `${Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100)}%` }}
+              />
+            </div>
+          </div>
+
           {/* Expandable detail */}
           {cartExpanded && (
-            <div className="px-4 pt-3 pb-1 space-y-1.5 border-b border-border max-h-48 overflow-y-auto">
+            <div className="px-4 pt-2 pb-1 space-y-1.5 border-b border-border max-h-48 overflow-y-auto">
               {Object.entries(cart).map(([id, qty]) => {
                 const p = products.find((pr) => pr.id === Number(id));
                 if (!p) return null;
@@ -245,16 +265,6 @@ const Shop = () => {
                 <div className="flex justify-between text-xs">
                   <span className="text-muted-foreground">GST (18%)</span>
                   <span>₹{gst.toLocaleString("en-IN")}</span>
-                </div>
-                <div className="flex justify-between text-xs items-center">
-                  <span className="text-muted-foreground flex items-center gap-1">
-                    <Truck className="h-3 w-3" /> Shipping
-                  </span>
-                  {freeShipping ? (
-                    <span className="text-primary font-semibold">FREE</span>
-                  ) : (
-                    <span className="text-destructive">₹{(FREE_SHIPPING_THRESHOLD - subtotal).toLocaleString("en-IN")} more for free</span>
-                  )}
                 </div>
               </div>
             </div>

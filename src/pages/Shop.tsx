@@ -67,8 +67,9 @@ const Shop = () => {
       if (p) sub += p.price * qty;
     });
     const g = Math.round(sub * GST_RATE * 100) / 100;
-    const free = sub >= FREE_SHIPPING_THRESHOLD;
-    return { subtotal: sub, gst: g, total: sub + g, freeShipping: free };
+    const tot = sub + g;
+    const free = tot >= FREE_SHIPPING_THRESHOLD;
+    return { subtotal: sub, gst: g, total: tot, freeShipping: free };
   }, [cart]);
 
   return (
@@ -233,13 +234,13 @@ const Shop = () => {
               {freeShipping ? (
                 <span className="text-primary font-semibold">FREE ✓</span>
               ) : (
-                <span className="text-muted-foreground">₹{(FREE_SHIPPING_THRESHOLD - subtotal).toLocaleString("en-IN")} more</span>
+                <span className="text-muted-foreground">₹{(FREE_SHIPPING_THRESHOLD - total).toLocaleString("en-IN")} more</span>
               )}
             </div>
             <div className="w-full h-1.5 rounded-full bg-secondary overflow-hidden">
               <div
                 className="h-full rounded-full bg-primary transition-all duration-300"
-                style={{ width: `${Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100)}%` }}
+                style={{ width: `${Math.min((total / FREE_SHIPPING_THRESHOLD) * 100, 100)}%` }}
               />
             </div>
           </div>

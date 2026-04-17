@@ -5,31 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Search, ShoppingCart, User, Plus, Minus, Truck, ChevronUp, ChevronDown } from "lucide-react";
 import GoogleLogo from "@/components/GoogleLogo";
 import { useNavigate } from "react-router-dom";
-
-const categories = ["All", "Detergents", "Machine Parts", "Consumables", "Packaging Material", "Others"];
-
-const trackingSteps = [
-  { label: "Ordered", step: 1 },
-  { label: "Packed", step: 2 },
-  { label: "Picked Up", step: 3 },
-  { label: "In Transit", step: 4 },
-  { label: "Delivered", step: 5 },
-];
-
-const products = [
-  { id: 1, name: "Premium Liquid Detergent 5L", hsn: "3402", price: 850, category: "Detergents" },
-  { id: 2, name: "Stain Remover Spray 500ml", hsn: "3402", price: 320, category: "Detergents" },
-  { id: 3, name: "Fabric Softener 2L", hsn: "3809", price: 450, category: "Detergents" },
-  { id: 4, name: "Washing Machine Belt", hsn: "4010", price: 280, category: "Machine Parts" },
-  { id: 5, name: "Drum Bearing Kit", hsn: "8482", price: 1200, category: "Machine Parts" },
-  { id: 6, name: "Water Inlet Valve", hsn: "8481", price: 650, category: "Machine Parts" },
-  { id: 7, name: "Lint Filter Mesh", hsn: "5911", price: 150, category: "Consumables" },
-  { id: 8, name: "Descaling Powder 1kg", hsn: "3824", price: 380, category: "Consumables" },
-  { id: 9, name: "Garment Cover Bags (50pcs)", hsn: "3923", price: 520, category: "Packaging Material" },
-  { id: 10, name: "Laundry Tags Roll (1000pcs)", hsn: "4821", price: 290, category: "Packaging Material" },
-  { id: 11, name: "Hanger Set (25pcs)", hsn: "3924", price: 375, category: "Others" },
-  { id: 12, name: "Steam Iron Teflon Sole", hsn: "8516", price: 980, category: "Others" },
-];
+import { products, categories } from "@/data/products";
 
 const FREE_SHIPPING_THRESHOLD = 50000;
 const GST_RATE = 0.18;

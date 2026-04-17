@@ -153,13 +153,13 @@ const Shop = () => {
             >
               {/* Product info */}
               <div className="flex-1 min-w-0">
-                <p className="font-medium text-sm text-foreground leading-tight truncate">{product.name}</p>
-                <div className="flex items-center gap-2 mt-0.5">
+                <p className="font-medium text-sm text-foreground leading-tight line-clamp-2">{product.name}</p>
+                <div className="flex items-center gap-2 mt-0.5 flex-wrap">
                   <span className="text-xs text-muted-foreground">{product.category}</span>
                   <span className="text-[10px] text-muted-foreground/60">HSN: {product.hsn}</span>
                 </div>
                 <p className="text-sm font-semibold text-foreground mt-1">
-                  ₹{product.price.toLocaleString("en-IN")}
+                  ₹{product.price.toLocaleString("en-IN")} <span className="text-[10px] font-normal text-muted-foreground">/ {product.unit}</span>
                 </p>
               </div>
 

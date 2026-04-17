@@ -7,6 +7,14 @@ import GoogleLogo from "@/components/GoogleLogo";
 import { useNavigate } from "react-router-dom";
 import { products, categories } from "@/data/products";
 
+const trackingSteps = [
+  { label: "Ordered", step: 1 },
+  { label: "Packed", step: 2 },
+  { label: "Picked Up", step: 3 },
+  { label: "In Transit", step: 4 },
+  { label: "Delivered", step: 5 },
+];
+
 const FREE_SHIPPING_THRESHOLD = 50000;
 const GST_RATE = 0.18;
 

@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, ShoppingCart, User, Plus, Minus, Truck, ChevronUp, ChevronDown, LifeBuoy } from "lucide-react";
+import { Search, ShoppingCart, User, Plus, Minus, Truck, ChevronUp, ChevronDown, LifeBuoy, Sprout } from "lucide-react";
 import GoogleLogo from "@/components/GoogleLogo";
 import { useNavigate } from "react-router-dom";
 import { products, categories } from "@/data/products";

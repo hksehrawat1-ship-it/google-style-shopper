@@ -9,6 +9,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Shop from "./pages/Shop";
 import Account from "./pages/Account";
 import RaiseIssue from "./pages/RaiseIssue";
+import GrowthCentre from "./pages/GrowthCentre";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/shop" element={<Shop />} />
           <Route path="/account" element={<Account />} />
           <Route path="/raise-issue" element={<RaiseIssue />} />
+          <Route path="/growth-centre" element={<GrowthCentre />} />
           <Route path="*" element={<NotFound />} />
 
         </Routes>

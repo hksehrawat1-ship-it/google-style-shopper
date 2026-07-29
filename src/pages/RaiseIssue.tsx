@@ -25,7 +25,7 @@ const PROBLEM_CATEGORIES = [
   "D. POS",
   "E. Graphic and Design",
   "F. Agreements",
-  "G. Owner",
+  "G. Learning",
   "H. Logistics & Supply Chain",
   "I. Others",
 ];

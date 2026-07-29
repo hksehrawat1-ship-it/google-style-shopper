@@ -22,7 +22,7 @@ import {
   BarChart3,
   Sparkles,
 } from "lucide-react";
-import GoogleLogo from "@components/GoogleLogo";
+import GoogleLogo from "@/components/GoogleLogo";
 
 const sections = [
   {

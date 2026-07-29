@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, ShoppingCart, User, Plus, Minus, Truck, ChevronUp, ChevronDown } from "lucide-react";
+import { Search, ShoppingCart, User, Plus, Minus, Truck, ChevronUp, ChevronDown, LifeBuoy } from "lucide-react";
 import GoogleLogo from "@/components/GoogleLogo";
 import { useNavigate } from "react-router-dom";
 import { products, categories } from "@/data/products";
@@ -63,6 +63,9 @@ const Shop = () => {
         <div className="flex items-center gap-2 py-2 px-3">
           <GoogleLogo />
           <div className="flex items-center gap-1 ml-auto">
+            <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => navigate("/raise-issue")} title="Raise issue">
+              <LifeBuoy className="h-5 w-5" />
+            </Button>
             <Button variant="ghost" size="icon" className="relative h-9 w-9" onClick={() => setCartExpanded(!cartExpanded)}>
               <ShoppingCart className="h-5 w-5" />
               {cartCount > 0 && (

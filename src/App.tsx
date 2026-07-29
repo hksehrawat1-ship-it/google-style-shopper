@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import Shop from "./pages/Shop";
 import Account from "./pages/Account";
+import RaiseIssue from "./pages/RaiseIssue";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,7 +25,9 @@ const App = () => (
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/raise-issue" element={<RaiseIssue />} />
           <Route path="*" element={<NotFound />} />
+
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
